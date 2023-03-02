@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+ul,
+li {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+// 셀렉트박스 색상
+$selbg: #f7f7f7;
+$selline: #f0f0f0;
+@mixin selboxbg {
+  background-color: $selbg;
+  border: 1px solid $selline;
+  border-radius: 4px;
+}
+// 셀렉트박스 너비
+@mixin selboxWidth {
+  min-width: 140px;
+}
+
+.selbox {
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+  @include selboxWidth;
+  @include selboxbg;
+  .selbtn {
+    width: 100%;
+    position: relative;
+    padding: 10px 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &::after {
+      font-family: "Material Icons";
+      content: "\e313";
+      transform: var(--selbtnAfter, 180deg);
+      transition: all 0.3s ease;
+    }
+  }
+  .list {
+    @include selboxWidth;
+    @include selboxbg;
+    margin-top: 6px;
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.4s ease;
+    position: absolute;
+    overflow: hidden;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    .item {
+      padding: 6px;
+      &:hover {
+        transition: all 0.3s ease;
+        background-color: #fff;
+        border-radius: 4px;
+      }
+    }
+  }
+  .list.on {
+    opacity: 1;
+    max-height: 300px;
+  }
+}

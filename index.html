@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ex</title>
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="selbox">
+      <span class="selbtn">select</span>
+      <ul class="list">
+        <li class="item" value="apple">apple</li>
+        <li class="item" value="banana">banana</li>
+        <li class="item" value="orange">orange</li>
+      </ul>
+    </div>
+    <script>
+      const $body = document.querySelector("body");
+      const selbtn = document.querySelector(".selbtn");
+      const lis = document.querySelector(".list");
+      const item = document.querySelectorAll(".item");
+      const selbtnAfter = window.getComputedStyle(selbtn, "::after");
+      console.log(selbtnAfter.transform);
+
+      $body.addEventListener(
+        "click",
+        function () {
+          lis.classList.remove("on");
+          selbtn.style.setProperty("--selbtnAfter", "rotate(0deg)");
+        },
+        false
+      );
+      selbtn.addEventListener(
+        "click",
+        function (event) {
+          event.stopPropagation();
+          lis.classList.add("on");
+          selbtn.style.setProperty("--selbtnAfter", "rotate(180deg)");
+        },
+        false
+      );
+
+      for (let i = 0; i < item.length; i++) {
+        item[i].addEventListener(
+          "click",
+          function () {
+            console.log(item[i].getAttribute("value"));
+            this.parentElement.previousElementSibling.innerHTML =
+              item[i].getAttribute("value");
+            this.parentElement.classList.remove("on");
+            selbtn.style.setProperty("--selbtnAfter", "rotate(0deg)");
+          },
+          true
+        );
+      }
+    </script>
+  </body>
+</html>
